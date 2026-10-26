@@ -1,9 +1,9 @@
 import { zipSync, unzipSync, strToU8, strFromU8 } from "fflate";
-import { KEY, uid, validateImport } from "./model.js";
+import { KEY, DOCUMENT_DB, uid, validateImport } from "./model.js";
 export const MAX_FILE_SIZE = 10 * 1024 * 1024;
 export const MAX_ARCHIVE_SIZE = 100 * 1024 * 1024;
 const MAX_MANIFEST_SIZE = 10 * 1024 * 1024;
-const DB_NAME = "fresandiere-documents";
+const DB_NAME = DOCUMENT_DB;
 function openDatabase() {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(DB_NAME, 1);

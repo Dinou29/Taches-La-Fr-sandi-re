@@ -255,6 +255,7 @@ test("pièce jointe et lien : rechargement, ZIP puis restauration complète dans
     await restored
       .getByRole("button", { name: "Remplacer et restaurer" })
       .click();
+    await expect(restored.getByText("Sauvegarde restaurée.", {exact:true})).toBeVisible();
     await restored.reload();
     await restored
       .getByRole("button", { name: "Entretiens", exact: true })

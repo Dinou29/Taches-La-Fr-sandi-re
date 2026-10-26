@@ -2114,3 +2114,55 @@ input[type="file"][hidden] {
   display: inline-block;
   margin: -5px 0 18px;
 }
+.site-version {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+  margin-left: auto;
+  white-space: nowrap;
+  text-align: right;
+}
+.site-version strong {
+  font-weight: 600;
+  color: #e8efdf;
+}
+.site-version a {
+  color: #f2dfb6;
+  text-underline-offset: 3px;
+}
+.site-version + .header-week {
+  margin-left: 0;
+}
+@media (max-width: 850px) {
+  .site-version {
+    font-size: 10px;
+  }
+  .brand-function {
+    min-width: 0;
+  }
+  .brand-strip {
+    gap: 16px;
+  }
+}
+@media (max-width: 600px) {
+  .brand-strip:has(.site-version) {
+    position: relative;
+    padding-bottom: 30px;
+  }
+  .site-version {
+    position: absolute;
+    bottom: 6px;
+    left: 17px;
+    right: 17px;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 10px;
+  }
+  .site-version strong {
+    font-weight: 500;
+  }
+  .site-version a {
+    font-size: 10px;
+  }
+}

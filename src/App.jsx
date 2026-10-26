@@ -24,6 +24,7 @@ import Catalog from "./Catalog.jsx";
 import { Modal } from "./ui.jsx";
 import {
   KEY,
+  SEPARATE_V2,
   empty,
   validateImport,
   localDate,
@@ -36,23 +37,7 @@ import {
   overdue,
 } from "./model.js";
 import { downloadBlob } from "./documents.js";
-function load() {
-  try {
-    const raw = localStorage.getItem(KEY);
-    return {
-      db: raw ? validateImport(JSON.parse(raw)) : empty(),
-      blocked: false,
-      error: "",
-    };
-  } catch {
-    return {
-      db: empty(),
-      blocked: true,
-      error:
-        "La sauvegarde locale est illisible. Elle est conservée sans être écrasée. Restaurez une sauvegarde valide dans Paramètres.",
-    };
-  }
-}
+import { loadStoredData } from "./storage.js";
 const NAV = [
   ["settings", "Paramètres", Settings],
   ["maintenance", "Entretiens", Wrench],
@@ -60,7 +45,7 @@ const NAV = [
   ["contacts", "Contacts", UsersRound],
 ];
 export default function App() {
-  const [initial] = useState(load),
+  const [initial] = useState(() => loadStoredData()),
     [db, setDb] = useState(initial.db),
     [view, setView] = useState("home"),
     [form, setForm] = useState(null),
@@ -135,6 +120,12 @@ export default function App() {
             />
           </button>
           <p className="brand-function">Travaux & entretiens de la maison</p>
+          {SEPARATE_V2 && (
+            <div className="site-version">
+              <strong>V2 indépendante</strong>
+              <a href="../">Ouvrir la V1</a>
+            </div>
+          )}
           {isHome && (
             <div className="header-week">
               <span>Semaine en cours</span>

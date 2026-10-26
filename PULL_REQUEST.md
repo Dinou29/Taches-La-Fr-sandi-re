@@ -7,10 +7,11 @@ Les entretiens acceptent des pièces jointes PDF/images dans IndexedDB et des li
 La palette utilise un bleu canard profond et le combi terracotta/crème. Le CSS est restructuré en une feuille cohérente, sans barre latérale ni navigation fixe devant les formulaires. Les préférences se trouvent dans Paramètres.
 
 Validation effectuée :
+
 - 16 tests modèle et documents réussis : dates, récurrences, compatibilité v1, fichiers, ZIP, corruption et annulation des écritures en cas d’échec du stockage.
 - 8 parcours Chromium réussis : formulaires, calendrier, achats, contacts et contrats, sauvegardes, restauration dans un autre contexte navigateur, téléphone et clavier.
 - Compilation Vite et construction statique `docs/` réussies.
 
 Limite visuelle : le PNG/SVG authentique `upload/blason.png` et les trois fichiers de maquette cités dans la V2 sont absents de l’environnement. Le blason existant est conservé provisoirement, sans nouvelle génération. La capture Entretien fournie et les descriptions V2 guident les écrans.
 
-Cette branche ne doit pas être fusionnée automatiquement : `main` et l’hébergement GitHub Pages restent inchangés tant que la mise en ligne n’est pas demandée. Aucune donnée personnelle, pièce jointe privée ou sauvegarde utilisateur n’est incluse dans le dépôt.
+Mise en ligne demandée ensuite par l’utilisatrice avec maintien des deux versions. La V1 et son contenu statique restent à la racine ; la V2 est distribuée dans `/v2/` avec stockage séparé et copie initiale non destructive du planning V1. Aucun changement de visibilité du dépôt n’est effectué.
