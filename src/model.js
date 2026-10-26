@@ -38,14 +38,26 @@ export function addMonths(s, n) {
 }
 export const formatDate = (s, options = { day: "numeric", month: "short" }) =>
   s ? parseDate(s).toLocaleDateString("fr-FR", options) : "Sans date";
+export const DEFAULT_SETTINGS = {
+  timezone: "Europe/Paris",
+  leadDays: 2,
+  bubbles: true,
+  combiName: "",
+  calendarView: "month",
+  horizonDays: 21,
+  maintenancePeriod: "month",
+  preferredSlots: [
+    { weekday: 1, period: "matin", availability: "Disponible" },
+    { weekday: 3, period: "après-midi", availability: "Disponible" },
+    { weekday: 6, period: "horaire à préciser", availability: "À confirmer" },
+    { weekday: 0, period: "horaire à préciser", availability: "À confirmer" },
+  ],
+};
 export const empty = () => ({
   version: VERSION,
-  settings: {
-    timezone: "Europe/Paris",
-    leadDays: 2,
-    bubbles: true,
-    combiName: "",
-  },
+  settings: structuredClone(DEFAULT_SETTINGS),
+  attachments: [],
+  rooms: [],
   weeks: {},
   slots: {},
   interventions: [],
@@ -106,7 +118,10 @@ export function deadline(p, db) {
 export function slotStatus(db, date) {
   return (
     db.slots[date] ||
-    ([0, 6].includes(parseDate(date).getDay()) ? "À confirmer" : "Disponible")
+    (db.settings.preferredSlots || DEFAULT_SETTINGS.preferredSlots).find(
+      (p) => p.weekday === parseDate(date).getDay(),
+    )?.availability ||
+    "Disponible"
   );
 }
 export function preparation(i, db) {
@@ -151,6 +166,8 @@ export function newIntervention(type = "bricolage", date = "") {
     completedDate: "",
     preparation: "Matériel à vérifier",
     companyId: "",
+    contactPersonId: "",
+    documentLinks: [],
     contractId: "",
     equipmentId: "",
     tools: [],
@@ -174,7 +191,12 @@ export function completeMaintenance(
   documents = "",
 ) {
   const current = db.interventions.find((x) => x.id === id);
-  if (!current || current.status === "Réalisé") return db;
+  if (
+    !current ||
+    current.type !== "entretien" ||
+    ["Réalisé", "Annulé"].includes(current.status)
+  )
+    return db;
   const completed = {
     ...current,
     status: "Réalisé",
@@ -188,6 +210,8 @@ export function completeMaintenance(
         documents,
         company: db.companies.find((x) => x.id === current.companyId) || null,
         contract: db.contracts.find((x) => x.id === current.contractId) || null,
+        contact:
+          db.people.find((x) => x.id === current.contactPersonId) || null,
       },
     ],
   };
@@ -214,6 +238,9 @@ export function completeMaintenance(
         appointment: "",
         completedDate: "",
         history: [],
+        documentLinks: (current.documentLinks || []).filter((d) =>
+          ["Notice", "Contrat"].includes(d.category),
+        ),
         tools: (current.tools || []).map((t) => ({
           ...t,
           confirmed: false,
@@ -369,7 +396,13 @@ export function validateImport(input) {
       if (typeof x.name !== "string" || !x.name.trim())
         throw new Error("Fiche sans nom.");
   validateDetails(data, validDate);
-  return data;
+  validateV2(data, ids, validDate);
+  return {
+    ...data,
+    attachments: data.attachments || [],
+    rooms: data.rooms || [],
+    settings: { ...structuredClone(DEFAULT_SETTINGS), ...data.settings },
+  };
 }
 export function safeUrl(s) {
   try {
@@ -477,6 +510,7 @@ function validateDetails(data, validDate) {
       "equipmentId",
       "seriesId",
       "duration",
+      "appointmentNotes",
       "lastKnown",
       "occurrenceKey",
     ]);
@@ -510,7 +544,7 @@ function validateDetails(data, validDate) {
     for (const h of i.history) {
       if (!h || !validDate(h.date)) throw new Error("Historique invalide.");
       strings(h, ["notes", "documents"]);
-      for (const key of ["company", "contract"])
+      for (const key of ["company", "contract", "contact"])
         if (h[key]) {
           if (typeof h[key] !== "object" || typeof h[key].name !== "string")
             throw new Error("Référence historique invalide.");
@@ -528,4 +562,136 @@ function validateDetails(data, validDate) {
       "productId",
       "customDate",
     ]);
+}
+
+export const active = (i) => !done(i) && i.status !== "Annulé";
+export function interventionDates(i) {
+  return [
+    ...new Set(
+      (i.type === "bricolage"
+        ? [i.date]
+        : [i.due, i.appointment?.slice(0, 10)]
+      ).filter(Boolean),
+    ),
+  ];
+}
+export function interventionsOn(db, date) {
+  return db.interventions.filter((i) => interventionDates(i).includes(date));
+}
+export function nextInterventions(db, today) {
+  const end = shift(today, (db.settings.horizonDays || 21) - 1);
+  return db.interventions
+    .filter(
+      (i) => active(i) && dateOf(i) && dateOf(i) >= today && dateOf(i) <= end,
+    )
+    .sort((a, b) => dateOf(a).localeCompare(dateOf(b)));
+}
+export function overdue(db, today) {
+  return db.interventions.filter(
+    (i) =>
+      active(i) &&
+      (i.type === "entretien" ? i.due : dateOf(i)) &&
+      (i.type === "entretien" ? i.due : dateOf(i)) < today,
+  );
+}
+function validateV2(data, ids, validDate) {
+  const settings = data.settings;
+  if (
+    settings.calendarView !== undefined &&
+    !["week", "month", "year"].includes(settings.calendarView)
+  )
+    throw new Error("Vue du calendrier invalide.");
+  if (
+    settings.maintenancePeriod !== undefined &&
+    !["month", "year"].includes(settings.maintenancePeriod)
+  )
+    throw new Error("Période d’entretien invalide.");
+  if (
+    settings.horizonDays !== undefined &&
+    (!Number.isInteger(settings.horizonDays) ||
+      settings.horizonDays < 1 ||
+      settings.horizonDays > 365)
+  )
+    throw new Error("Période des post-it invalide.");
+  if (settings.preferredSlots !== undefined) {
+    if (!Array.isArray(settings.preferredSlots))
+      throw new Error("Préférences de planning invalides.");
+    const days = new Set();
+    for (const p of settings.preferredSlots) {
+      if (
+        !p ||
+        !Number.isInteger(p.weekday) ||
+        p.weekday < 0 ||
+        p.weekday > 6 ||
+        days.has(p.weekday) ||
+        !PERIODS.includes(p.period) ||
+        !["Disponible", "À confirmer", "Indisponible"].includes(p.availability)
+      )
+        throw new Error("Créneau préféré invalide.");
+      days.add(p.weekday);
+    }
+  }
+  if (
+    data.rooms !== undefined &&
+    (!Array.isArray(data.rooms) ||
+      data.rooms.some((r) => typeof r !== "string" || !r.trim()))
+  )
+    throw new Error("Pièces invalides.");
+  const attachmentIds = new Set();
+  if (data.attachments !== undefined) {
+    if (!Array.isArray(data.attachments))
+      throw new Error("Pièces jointes invalides.");
+    for (const a of data.attachments) {
+      if (
+        !a ||
+        typeof a.id !== "string" ||
+        !a.id ||
+        attachmentIds.has(a.id) ||
+        !ids.interventions.has(a.interventionId) ||
+        typeof a.name !== "string" ||
+        !a.name.trim() ||
+        ![
+          "application/pdf",
+          "image/png",
+          "image/jpeg",
+          "image/webp",
+          "image/gif",
+        ].includes(a.type) ||
+        !Number.isInteger(a.size) ||
+        a.size <= 0 ||
+        a.size > 10 * 1024 * 1024 ||
+        typeof a.category !== "string"
+      )
+        throw new Error("Référence de fichier invalide.");
+      attachmentIds.add(a.id);
+    }
+  }
+  for (const i of data.interventions) {
+    if (i.contactPersonId && !ids.people.has(i.contactPersonId))
+      throw new Error("Personne à contacter inconnue.");
+    if (
+      i.contactPersonId !== undefined &&
+      typeof i.contactPersonId !== "string"
+    )
+      throw new Error("Contact invalide.");
+    if (i.documentLinks !== undefined) {
+      if (!Array.isArray(i.documentLinks))
+        throw new Error("Liens de documents invalides.");
+      const links = new Set();
+      for (const d of i.documentLinks) {
+        if (
+          !d ||
+          typeof d.id !== "string" ||
+          !d.id ||
+          links.has(d.id) ||
+          typeof d.name !== "string" ||
+          !d.name.trim() ||
+          !safeUrl(d.url) ||
+          typeof d.category !== "string"
+        )
+          throw new Error("Document lié invalide.");
+        links.add(d.id);
+      }
+    }
+  }
 }

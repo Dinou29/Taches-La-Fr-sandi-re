@@ -87,6 +87,7 @@ export function CatalogDialog({ kind, db, onSave, onClose, item }) {
       <form
         onSubmit={(e) => {
           e.preventDefault();
+          e.stopPropagation();
           if (!draft.name.trim()) {
             setError("Renseignez un nom.");
             return;
@@ -147,8 +148,13 @@ export function CatalogDialog({ kind, db, onSave, onClose, item }) {
     </Modal>
   );
 }
-export default function Catalog({ db, onChange }) {
-  const [kind, setKind] = useState("companies"),
+export default function Catalog({
+  db,
+  onChange,
+  kinds = Object.keys(CATALOGS),
+  onOpen,
+}) {
+  const [kind, setKind] = useState(kinds[0] || "companies"),
     [edit, setEdit] = useState(null),
     [archived, setArchived] = useState(false),
     [copied, setCopied] = useState("");
@@ -156,8 +162,8 @@ export default function Catalog({ db, onChange }) {
     <>
       <div className="section-heading">
         <div>
-          <h2>Mon carnet de maison</h2>
-          <p>Les bonnes références, toujours à portée de main.</p>
+          <h2>Contacts et références</h2>
+          <p>Fiches réutilisables et interventions liées.</p>
         </div>
         <button className="btn primary" onClick={() => setEdit({})}>
           <Plus size={17} />
@@ -165,16 +171,18 @@ export default function Catalog({ db, onChange }) {
         </button>
       </div>
       <div className="tabs catalog-tabs">
-        {Object.entries(CATALOGS).map(([k, v]) => (
-          <button
-            key={k}
-            className={kind === k ? "active" : ""}
-            onClick={() => setKind(k)}
-          >
-            {v.label}
-            <span>{db[k].filter((x) => !x.archived).length}</span>
-          </button>
-        ))}
+        {Object.entries(CATALOGS)
+          .filter(([key]) => kinds.includes(key))
+          .map(([k, v]) => (
+            <button
+              key={k}
+              className={kind === k ? "active" : ""}
+              onClick={() => setKind(k)}
+            >
+              {v.label}
+              <span>{db[k].filter((x) => !x.archived).length}</span>
+            </button>
+          ))}
       </div>
       <label className="check-line">
         <input
@@ -242,6 +250,28 @@ export default function Catalog({ db, onChange }) {
               )}
               {x.notes && <p className="pre-line">{x.notes}</p>}
               <External url={x.url}>Ouvrir le lien</External>
+              {onOpen && (
+                <div className="related-interventions">
+                  {db.interventions
+                    .filter(
+                      (i) =>
+                        i.companyId === x.id ||
+                        i.contactPersonId === x.id ||
+                        i.people?.some((p) => p.personId === x.id),
+                    )
+                    .map((i) => (
+                      <button
+                        type="button"
+                        className="text-link"
+                        key={i.id}
+                        onClick={() => onOpen(i)}
+                      >
+                        {i.type === "entretien" ? "Entretien" : "Tâche"} :{" "}
+                        {i.title}
+                      </button>
+                    ))}
+                </div>
+              )}
               <div className="row card-actions">
                 <button
                   className="btn secondary small"

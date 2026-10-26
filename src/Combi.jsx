@@ -1,6 +1,6 @@
 import React from "react";
 import { Check, ShoppingBag, Wrench, Compass } from "lucide-react";
-import combi from "./assets/combi-volkswagen.png";
+import combi from "./assets/combi-terracotta.png";
 
 const contextIcons = {
   shopping: ShoppingBag,
@@ -16,7 +16,7 @@ export default function Combi({ pose = "welcome", className = "" }) {
       <img
         className="combi-image"
         src={combi}
-        alt="Combi Volkswagen bricoleur, vert et crème"
+        alt="Combi Volkswagen bricoleur, terracotta et crème"
         width="1254"
         height="1254"
         decoding="async"

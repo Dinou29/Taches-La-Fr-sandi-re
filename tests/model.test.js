@@ -148,3 +148,65 @@ test("export/import conserve relations et refuse les données invalides", () => 
     validateImport({ ...db, settings: { ...db.settings, leadDays: -1 } }),
   );
 });
+
+test("compatibilité additive v1 : préférences par défaut et anciens champs conservés", async () => {
+  const { DEFAULT_SETTINGS } = await import("../src/model.js");
+  const db = empty();
+  delete db.attachments;
+  delete db.rooms;
+  db.settings = {
+    timezone: "Europe/Paris",
+    leadDays: 2,
+    dogName: "Ancien nom",
+  };
+  const i = newIntervention();
+  Object.assign(i, {
+    title: "Ancienne tâche",
+    lot: "Lot conservé",
+    objective: "Objectif conservé",
+    documents: ["https://example.com/notice.pdf"],
+  });
+  db.interventions = [i];
+  const restored = validateImport(db);
+  assert.deepEqual(restored.interventions[0], i);
+  assert.equal(restored.settings.calendarView, "month");
+  assert.equal(restored.settings.horizonDays, 21);
+  assert.equal(restored.settings.dogName, "Ancien nom");
+  assert.deepEqual(restored.attachments, []);
+});
+test("calendrier partagé : dates de rendez-vous et échéance, actions et horizon des post-it", async () => {
+  const { interventionsOn, nextInterventions, active } =
+    await import("../src/model.js");
+  const db = empty();
+  const a = newIntervention("bricolage", "2026-10-26");
+  a.title = "Une tâche";
+  const b = { ...a, id: uid() };
+  const m = newIntervention("entretien", "2026-10-27");
+  m.title = "Entretien";
+  m.appointment = "2026-10-29T10:00";
+  db.interventions = [a, b, m];
+  assert.equal(interventionsOn(db, "2026-10-26").filter(active).length, 2);
+  a.status = "Terminé";
+  assert.equal(interventionsOn(db, "2026-10-26").filter(active).length, 1);
+  b.status = "Terminé";
+  assert.equal(interventionsOn(db, "2026-10-26").filter(active).length, 0);
+  assert.equal(interventionsOn(db, "2026-10-27")[0].id, m.id);
+  assert.equal(interventionsOn(db, "2026-10-29")[0].id, m.id);
+  db.settings.horizonDays = 2;
+  assert.equal(nextInterventions(db, "2026-10-26").length, 0);
+  m.appointment = "";
+  assert.equal(nextInterventions(db, "2026-10-26").length, 1);
+  m.status = "Annulé";
+  assert.equal(nextInterventions(db, "2026-10-26").length, 0);
+});
+test("aucune fréquence connue : réalisation sans prochaine occurrence inventée", () => {
+  const db = empty();
+  const i = newIntervention("entretien");
+  i.title = "À définir";
+  db.interventions = [i];
+  const result = completeMaintenance(db, i.id, "2026-10-26");
+  assert.equal(result.interventions.length, 1);
+  assert.equal(result.interventions[0].status, "Réalisé");
+  i.status = "Annulé";
+  assert.equal(completeMaintenance(db, i.id, "2026-10-26"), db);
+});

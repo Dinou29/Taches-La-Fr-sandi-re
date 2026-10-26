@@ -1,4 +1,5 @@
 import React from "react";
+import { createPortal } from "react-dom";
 import { X, ArrowUpRight } from "lucide-react";
 import { safeUrl } from "./model.js";
 export function Field({ label, children, hint, wide = false }) {
@@ -20,7 +21,7 @@ export function Field({ label, children, hint, wide = false }) {
   );
 }
 export function Modal({ title, subtitle, onClose, children, wide = false }) {
-  return (
+  return createPortal(
     <div
       className="modal-overlay"
       onMouseDown={(e) => {
@@ -73,7 +74,8 @@ export function Modal({ title, subtitle, onClose, children, wide = false }) {
         </header>
         {children}
       </section>
-    </div>
+    </div>,
+    document.body,
   );
 }
 export function External({ url, children }) {

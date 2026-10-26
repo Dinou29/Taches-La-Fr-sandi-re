@@ -1,89 +1,80 @@
-# La Frésandière — Le carnet de la maison
+# La Frésandière — Travaux & entretiens de la maison
 
-Une application personnelle, en français, pour organiser les travaux et les entretiens de la maison. React 19 et Vite, sans compte, serveur de données ou service payant.
+Application personnelle et familiale en français, React 19 / Vite. La V2 adapte l’application existante : accueil compact, calendrier semaine/mois/année, post-it, fiches Tâche et Entretien distinctes, achats, contacts et documents annexes.
 
 ## Démarrer
 
-Prérequis : Node.js 22 ou 24 et npm.
+Node.js 22 ou 24 et npm. Depuis le dépôt existant :
 
 ```sh
-cd /workspace/Taches-La-Fr-sandi-re
 npm ci --cache /tmp/maison-npm-cache
 npm run dev
 ```
 
-Le serveur écoute sur le port **5173**, sur toutes les interfaces. Il doit être relancé après le redémarrage de l’environnement. Le dépôt existant suffit : aucun worktree supplémentaire n’est nécessaire.
+Le serveur écoute sur le port 5173. Aucun compte applicatif, secret, serveur de données ou service payant n’est nécessaire. Les processus sont à relancer après redémarrage de l’environnement. Chaque tâche cloud est déjà isolée : aucun worktree supplémentaire n’est nécessaire sauf demande explicite.
 
 ```sh
-npm run build       # version de production dans dist/
-npm run preview     # servir cette version
-npm test            # tests du modèle
-npm run test:e2e    # parcours dans Chromium
+npm test             # modèle, dates, récurrences, compatibilité et fichiers
+npm run test:e2e      # parcours Chromium ordinateur et téléphone
+npm run build        # production dans dist/
+npm run preview      # servir dist/
+npm run build:pages  # production statique dans docs/, avec .nojekyll
 ```
 
-Les tests navigateur utilisent `/usr/bin/chromium`. Pour une autre installation, définir `CHROMIUM_PATH` avec le chemin du navigateur. Playwright lance Vite automatiquement si nécessaire. Les données de test restent dans des contextes navigateur isolés et ne préremplissent jamais l’application.
+Les tests navigateur utilisent `/usr/bin/chromium` (modifiable par `CHROMIUM_PATH`). Ils démarrent Vite au besoin, utilisent des contextes isolés et ne déposent aucune donnée d’exemple dans l’application.
 
-## Utilisation
+## Périmètre livré
 
-- **Cette semaine** : objectif propre à chaque semaine, navigation sans limite fixe, tâches multiples par créneau, classement par pièce et lot, filtres et liste à planifier. Lundi matin et mercredi après-midi sont disponibles ; samedi et dimanche demandent confirmation. Rendre un créneau indisponible conserve les tâches à déplacer.
-- **Agenda** : mois et semaine, création depuis une date, mêmes interventions que le planning. Les échéances d’entretien et les rendez-vous à heure connue ont des libellés distincts. Un rendez-vous après l’échéance est signalé.
-- **Courses** : achats rattachés aux interventions, quantités libres, magasins, références, cinq états et filtres. Les échéances automatiques suivent le déplacement de l’intervention et le délai global. Les dates personnalisées sont conservées et signalées si elles dépassent l’intervention. Les achats non planifiés restent sans date ; les échéances fondées sur un entretien sans rendez-vous sont provisoires.
-- **Entretiens** : vue annuelle, échéances inconnues, contact anticipé, rendez-vous à n’importe quelle date et heure, historique et périodicité choisie. Une réalisation crée une seule occurrence suivante avec des achats et outils à vérifier de nouveau. Le calcul suit l’échéance de référence ou la réalisation réelle. Les fins de mois sont ramenées au dernier jour existant. Une annulation ne vaut pas réalisation. L’arrêt d’une série empêche son renouvellement ; les occurrences déjà créées restent consultables.
-- **Fiches d’intervention** : préparation, achats, produits réutilisables, outils et modes d’obtention, personnes et rôles, entreprise et contrat, documents sous forme de liens, notes et historique. Ajouter plusieurs fois le même produit aux courses d’une intervention ne crée pas de doublon. Un outil emprunté, loué ou fourni nécessite une confirmation explicite.
-- **Carnet de maison** : équipements, entreprises, contrats, produits, outils et personnes réutilisables. Archiver une fiche conserve ses liens. Le numéro de contrat est du texte, y compris ses zéros initiaux. Sur téléphone, le carnet s’ouvre par l’icône de livre en haut à droite.
-- **Réglages** : fuseau (Europe/Paris par défaut), délai de courses (deux jours calendaires par défaut), nom du combi, affichage de ses bulles, export et import JSON.
+- Accueil : blason existant, mention de fonction, semaine actuelle calculée, combi terracotta/crème, création d’une tâche, calendrier, trois accès aux listes et post-it des prochaines interventions. Aucun formulaire, graphique ou statistique dominante sur l’accueil. Le bas de page comporte Paramètres, Entretiens, Tâches et Contacts, sans barre fixe ni menu latéral.
+- Calendrier : semaine/mois/année, navigation et retour Aujourd’hui, jours entourés uniquement lorsqu’une intervention active existe. Aujourd’hui garde son fond sauge. Un clic sur une date ouvre les interventions du jour, chacune ouvrant le bon type de fiche.
+- Tâche : titre, pièce, date facultative et personnes, puis Notes, Achats & matériel et Entreprise & contrat à déplier. Terminer/rouvrir en modification. Les anciens lots, périodes, objectifs, documents et historiques sont conservés dans les données, sans revenir dans la création.
+- Entretien : Quoi, Quand, Qui contacter, Contrat & rendez-vous, Documents annexes, Notes et préparation facultative. Fréquence « À définir » par défaut, aucune échéance inventée. Une fréquence connue permet une seule occurrence suivante à la réalisation, selon l’échéance ou la date réelle. Historique conservé ; arrêt de la récurrence et annulation distincts d’une réalisation.
+- Contacts : entreprises et personnes réutilisables, coordonnées communes aux interventions, interventions liées et archivage. Contrats, équipements, produits et outils accessibles depuis les fiches et les paramètres. Les références de contrat sont des textes, zéros initiaux compris.
+- Achats et matériel : relations par identifiant, états distincts, dates automatiques recalculées lors d’un déplacement et dates personnalisées conservées. Sans date d’intervention, aucun délai inventé. Échéance provisoire pour un entretien sans rendez-vous. Matériel loué, emprunté ou fourni à confirmer explicitement.
+- Paramètres : vue initiale du calendrier, horizon des post-it (21 jours par défaut : aujourd’hui et les 20 jours suivants), synthèse d’entretien mois/année, préférences hebdomadaires, exceptions de disponibilité, anticipation des achats et fuseau. Les jours non privilégiés restent planifiables ; rendre un jour indisponible conserve les tâches.
 
-La mascotte est le combi Volkswagen vert et crème fourni par l’utilisateur, détouré pour son intégration. Le blason de La Frésandière figure dans la navigation. Ces visuels sont embarqués ; leur affichage ne fait aucun appel à une IA. Les polices sont embarquées ; aucun service tiers n’est requis au simple affichage.
+Les alertes sont internes. Les liens téléphone/courriel ouvrent les applications du terminal sans affirmer qu’un appel ou un message a été envoyé. Aucun prix, stock, délai de livraison, obligation réglementaire ou validité de contrat n’est déduit.
 
-## Données et sauvegardes
+## Conservation et sauvegardes
 
-Le premier lancement est vide. Les créneaux proposés ne sont pas des tâches ou des obligations préenregistrées.
+Les données restent dans le **localStorage de cette origine et de ce navigateur**, sous la clé historique `maison-complice-v1`. La structure v1 est étendue de manière additive : réglages manquants complétés, collections `rooms` et `attachments` ajoutées si absentes, identifiants et champs historiques conservés. Aucune remise à zéro lors d’un changement de présentation. Un stockage illisible est protégé contre l’écrasement ; en cas d’échec d’enregistrement, les saisies restent en mémoire et peuvent être exportées.
 
-Les données sont enregistrées dans le **localStorage de ce navigateur, pour cette origine** (clé `maison-complice-v1`). Elles survivent au rechargement et à la fermeture du navigateur, mais pas à son effacement de données. Changer de domaine, de port, de profil ou d’appareil ne transfère pas les données. Il n’y a pas de synchronisation distante.
+Les **octets des pièces jointes** sont conservés dans **IndexedDB**, base `fresandiere-documents`, magasin `files`. Le JSON conserve leurs métadonnées et identifiants stables rattachés à l’entretien. Les fichiers ajoutés dans une nouvelle fiche annulée sont nettoyés. Retirer un document d’une fiche retire son rattachement ; les octets non référencés ne sont pas inclus dans les exports et sont remplacés lors d’une restauration ZIP complète.
 
-Dans les réglages, **Exporter en JSON** conserve les interventions, objectifs, créneaux, séries, historiques, achats, carnets, relations et réglages. **Importer** vérifie la structure, les identifiants, les relations, les dates et les états avant de demander confirmation du remplacement. Un fichier invalide ne remplace rien. Une sauvegarde locale illisible est protégée contre l’écrasement automatique. Si le stockage échoue, une alerte invite à exporter l’état en mémoire.
+Formats : PDF, PNG, JPEG, WebP et GIF, **10 Mo par fichier**. Les images sont affichables et les PDF sont ouverts dans le lecteur du navigateur ; un téléchargement reste disponible. L’affichage d’un PDF dépend des capacités du navigateur. Un quota insuffisant ou un type refusé affiche une erreur et n’ajoute aucune fausse référence.
 
-Le format initial est versionné `1`. Il n’existe pas de format antérieur à migrer ; les versions inconnues sont refusées. `migrate()` est le point d’entrée prévu pour les futures migrations explicites.
+Deux modes dans Paramètres :
 
-Les documents restent des **liens**, pas des pièces jointes sauvegardées. Ouvrir les coordonnées utilise les liens téléphone/courriel du terminal sans affirmer qu’un appel ou un message a été effectué. Les coordonnées ne sont transmises à aucun service par le simple affichage.
+- **ZIP avec documents** : manifeste JSON et tous les fichiers référencés, avec contrôle SHA-256 de leur intégrité. Limite : 100 Mo de fichiers et 10 Mo de manifeste. La restauration vérifie le format, les relations et chaque fichier avant confirmation. Les écritures de fichiers utilisent une transaction IndexedDB ; un échec du stockage JSON annule la transaction.
+- **JSON sans fichiers** : toutes les données et références, y compris les anciens champs, mais **pas les octets des pièces jointes**. Les sauvegardes JSON historiques restent importables. Les références seules ne rendent pas des fichiers disponibles sur un autre navigateur ; l’interface le signale.
 
-## Architecture
+Les liens externes portent un nom et une catégorie. Ils restent distincts des pièces jointes : l’adresse est sauvegardée, pas le contenu distant. Un import invalide ne remplace rien ; tout remplacement intégral nécessite confirmation. Une archive incomplète ou altérée est refusée.
 
-- `src/model.js` : modèle partagé, dates locales, achats, préparation, récurrences, validation des sauvegardes.
-- `src/App.jsx` : navigation, quatre vues, stockage et réglages.
-- `src/Editor.jsx` : fiche commune et achats.
-- `src/Catalog.jsx` : fiches réutilisables et archivage.
-- `src/Combi.jsx` et `src/assets/` : combi et blason de La Frésandière.
-- `src/ui.jsx`, `src/style.css` : composants communs, adaptation téléphone et réduction des mouvements.
-- `tests/` : tests unitaires et parcours navigateur.
+Fermer puis rouvrir le navigateur conserve les données tant que ses données de site ne sont pas effacées. Changer d’appareil, de domaine, de port ou de profil ne les transfère pas. Il n’y a **aucune synchronisation entre appareils**. Ne pas enregistrer de documents ou sauvegardes privés dans Git.
 
-Les dates sans heure sont des chaînes locales `AAAA-MM-JJ`, jamais des instants UTC. L’agenda et les courses dérivent des mêmes identifiants d’intervention. Les récurrences sont générées à la réalisation, sans tâche de fond ni notifications externes. Les snapshots d’entreprise et de contrat d’une réalisation sont conservés dans son historique.
+## Organisation du code
 
-## Périmètre et limites
+- `App.jsx` : navigation et stockage JSON.
+- `Home.jsx`, `Calendar.jsx`, `Lists.jsx` : accueil, dates, listes et achats.
+- `TaskForm.jsx`, `MaintenanceForm.jsx` : deux pages de saisie distinctes.
+- `FormParts.jsx`, `Preparation.jsx`, `PurchaseForm.jsx`, `Catalog.jsx` : éléments et références réutilisables.
+- `DocumentsPanel.jsx`, `documents.js` : pièces jointes, liens, IndexedDB et archives.
+- `SettingsPage.jsx` : préférences et sauvegardes.
+- `model.js` : règles partagées, dates locales, récurrences, validation et compatibilité.
+- `style.css` : palette centralisée, espacement et adaptation téléphone ; remplace les anciens empilements de styles.
 
-Cette première version est personnelle et locale. Elle ne fournit ni comptes partagés, synchronisation Google/Outlook, notifications quand elle est fermée, SMS, courriels, stockage de pièces jointes ni règles réglementaires automatiques. La fréquence d’entretien est choisie par l’utilisateur. Les prix, stocks, délais de livraison, compatibilités et validités de contrat ne sont pas déduits.
+Les dates sans heure sont des chaînes locales `AAAA-MM-JJ`. Le calendrier, les post-it, les achats et les contacts lisent les mêmes interventions. Les échéances et rendez-vous restent distincts. Les fréquences ne sont jamais imposées à la création. Les occurrences réalisées gardent un instantané de leurs contacts et contrats.
 
-Les modifications de cette occurrence concernent sa fiche et peuvent personnaliser son prochain calcul ; « cette occurrence et les suivantes » actualise aussi les fiches non réalisées de la série. Les dates déjà renseignées et les réalisations historiques ne sont pas réécrites. Arrêter une série ne supprime pas les occurrences déjà existantes.
+## Ressources visuelles et limites de référence
 
-## Publier sur GitHub Pages
+Le combi existant a été recoloré en terracotta/crème ; il est embarqué et ne fait aucun appel à une IA à l’affichage. Le blason utilisé est **le fichier déjà présent dans le dépôt**. Le fichier original `upload/blason.png` cité dans la V2 n’est pas disponible dans cet environnement : le visuel existant reste provisoire et doit être remplacé par le PNG/SVG authentique avant validation définitive de l’identité. Aucun nouveau blason n’a été généré pour cette V2.
 
-Une version statique prête à servir est conservée dans `docs/`. Ses chemins sont relatifs pour fonctionner sous le nom du dépôt. Aucune donnée du navigateur n’est incluse dans ces fichiers.
+Les trois maquettes `exec-0749…`, `exec-ffb2…` et `exec-10f0…` citées dans le document ne sont pas présentes. La composition suit leur description et la capture de fiche Entretien transmise pendant l’implémentation. Les captures réalisées pendant les tests sont des vues de l’application, pas une preuve de publication.
 
-Après l’envoi sur GitHub, ouvrir **Settings → Pages** du dépôt :
+## Livraison et GitHub Pages
 
-1. Sous **Build and deployment**, choisir **Deploy from a branch**.
-2. Sélectionner la branche **main** et le dossier **/docs**, puis **Save**.
-3. Attendre la fin de la publication et ouvrir l’adresse affichée par GitHub.
+La V2 est préparée sur une **branche dédiée**. Sa préparation, son envoi sur cette branche et la construction de `docs/` **ne publient pas cette version**. Aucun changement de visibilité du dépôt n’est effectué.
 
-Pour mettre à jour le site après une modification :
+L’hébergement existant utilise `main` et `/docs`. Seule une fusion explicitement autorisée vers `main` déclenchera sa mise à jour. Pour une mise à jour ultérieure : reconstruire `docs/` avec `npm run build:pages`, puis examiner et fusionner les changements. Les liens relatifs restent compatibles avec le chemin du dépôt GitHub Pages.
 
-```sh
-npm run build:pages
-# Enregistrer et envoyer aussi les nouveaux fichiers de docs/ sur GitHub.
-```
-
-L’adresse GitHub Pages attendue pour ce dépôt est `https://dinou29.github.io/Taches-La-Fr-sandi-re/`. Elle ne sera accessible qu’après activation et publication réussies par GitHub. Une adresse personnalisée déjà configurée dans GitHub peut remplacer cette adresse.
-
-Sur un dépôt privé, la disponibilité de Pages dépend de l’offre GitHub du propriétaire. Aucun changement de visibilité du dépôt n’est effectué par ces instructions.
-
-La clé de stockage `maison-complice-v1` reste inchangée après la nouvelle identité visuelle, pour conserver les données et les anciennes sauvegardes. Les anciens réglages du chien sont acceptés à l’import, mais ne sont plus proposés dans l’interface.
+Hors périmètre : comptes partagés, synchronisation Google/Outlook, notifications hors application, SMS/courriels automatiques et extraction d’obligations réglementaires.
