@@ -58,7 +58,7 @@ export function Modal({ title, subtitle, onClose, children, wide = false }) {
       >
         <header className="modal-header">
           <div>
-            <span className="eyebrow">MAISON COMPLICE</span>
+            <span className="eyebrow">LA FRÉSANDIÈRE</span>
             <h2>{title}</h2>
             {subtitle && <p>{subtitle}</p>}
           </div>

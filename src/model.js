@@ -44,9 +44,7 @@ export const empty = () => ({
     timezone: "Europe/Paris",
     leadDays: 2,
     bubbles: true,
-    dogName: "",
-    dogColor: "#805e49",
-    dogAccessory: true,
+    combiName: "",
   },
   weeks: {},
   slots: {},
@@ -414,7 +412,8 @@ function validateDetails(data, validDate) {
     for (const k of keys)
       if (o[k] && !validDate(o[k])) throw new Error(`Date invalide : ${k}.`);
   };
-  strings(data.settings, ["dogName", "dogColor"]);
+  // Les anciens réglages du chien restent lisibles dans les sauvegardes v1.
+  strings(data.settings, ["combiName", "dogName", "dogColor"]);
   for (const k of ["bubbles", "dogAccessory"])
     if (data.settings[k] !== undefined && typeof data.settings[k] !== "boolean")
       throw new Error("Préférence invalide.");

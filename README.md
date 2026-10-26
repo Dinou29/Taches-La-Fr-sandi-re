@@ -1,4 +1,4 @@
-# Maison complice
+# La Frésandière — Le carnet de la maison
 
 Une application personnelle, en français, pour organiser les travaux et les entretiens de la maison. React 19 et Vite, sans compte, serveur de données ou service payant.
 
@@ -31,9 +31,9 @@ Les tests navigateur utilisent `/usr/bin/chromium`. Pour une autre installation,
 - **Entretiens** : vue annuelle, échéances inconnues, contact anticipé, rendez-vous à n’importe quelle date et heure, historique et périodicité choisie. Une réalisation crée une seule occurrence suivante avec des achats et outils à vérifier de nouveau. Le calcul suit l’échéance de référence ou la réalisation réelle. Les fins de mois sont ramenées au dernier jour existant. Une annulation ne vaut pas réalisation. L’arrêt d’une série empêche son renouvellement ; les occurrences déjà créées restent consultables.
 - **Fiches d’intervention** : préparation, achats, produits réutilisables, outils et modes d’obtention, personnes et rôles, entreprise et contrat, documents sous forme de liens, notes et historique. Ajouter plusieurs fois le même produit aux courses d’une intervention ne crée pas de doublon. Un outil emprunté, loué ou fourni nécessite une confirmation explicite.
 - **Carnet de maison** : équipements, entreprises, contrats, produits, outils et personnes réutilisables. Archiver une fiche conserve ses liens. Le numéro de contrat est du texte, y compris ses zéros initiaux. Sur téléphone, le carnet s’ouvre par l’icône de livre en haut à droite.
-- **Réglages** : fuseau (Europe/Paris par défaut), délai de courses (deux jours calendaires par défaut), nom, couleur et foulard de la mascotte, affichage de ses bulles, export et import JSON.
+- **Réglages** : fuseau (Europe/Paris par défaut), délai de courses (deux jours calendaires par défaut), nom du combi, affichage de ses bulles, export et import JSON.
 
-La mascotte est un petit brabançon SVG original intégré au code, décliné en accueil, réflexion, courses, préparation et félicitations. Elle ne fait aucun appel à une IA. Les polices sont embarquées ; aucun service tiers n’est requis au simple affichage.
+La mascotte est le combi Volkswagen vert et crème fourni par l’utilisateur, détouré pour son intégration. Le blason de La Frésandière figure dans la navigation. Ces visuels sont embarqués ; leur affichage ne fait aucun appel à une IA. Les polices sont embarquées ; aucun service tiers n’est requis au simple affichage.
 
 ## Données et sauvegardes
 
@@ -53,7 +53,7 @@ Les documents restent des **liens**, pas des pièces jointes sauvegardées. Ouvr
 - `src/App.jsx` : navigation, quatre vues, stockage et réglages.
 - `src/Editor.jsx` : fiche commune et achats.
 - `src/Catalog.jsx` : fiches réutilisables et archivage.
-- `src/Dog.jsx` : illustration de la mascotte.
+- `src/Combi.jsx` et `src/assets/` : combi et blason de La Frésandière.
 - `src/ui.jsx`, `src/style.css` : composants communs, adaptation téléphone et réduction des mouvements.
 - `tests/` : tests unitaires et parcours navigateur.
 
@@ -85,3 +85,5 @@ npm run build:pages
 L’adresse GitHub Pages attendue pour ce dépôt est `https://dinou29.github.io/Taches-La-Fr-sandi-re/`. Elle ne sera accessible qu’après activation et publication réussies par GitHub. Une adresse personnalisée déjà configurée dans GitHub peut remplacer cette adresse.
 
 Sur un dépôt privé, la disponibilité de Pages dépend de l’offre GitHub du propriétaire. Aucun changement de visibilité du dépôt n’est effectué par ces instructions.
+
+La clé de stockage `maison-complice-v1` reste inchangée après la nouvelle identité visuelle, pour conserver les données et les anciennes sauvegardes. Les anciens réglages du chien sont acceptés à l’import, mais ne sont plus proposés dans l’interface.

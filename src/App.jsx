@@ -32,7 +32,8 @@ import {
   AlertCircle,
   Undo2,
 } from "lucide-react";
-import Dog from "./Dog.jsx";
+import Combi from "./Combi.jsx";
+import blason from "./assets/blason-fresandiere.png";
 import Editor, { PurchaseForm } from "./Editor.jsx";
 import Catalog from "./Catalog.jsx";
 import { Modal, Field, Empty } from "./ui.jsx";
@@ -385,7 +386,10 @@ export default function App() {
       <>
         <section className="welcome-banner">
           <div className="welcome-copy">
-            <span className="eyebrow">UN PETIT PAS, UN GRAND CHEZ-SOI</span>
+            <span className="hero-number" aria-hidden="true">
+              01
+            </span>
+            <span className="eyebrow">LES IDÉES PRENNENT VIE À LA MAISON</span>
             <h2>
               Votre maison avance.
               <br />
@@ -396,29 +400,18 @@ export default function App() {
               <br />
               Et si on préparait une belle semaine ?
             </p>
+            <svg className="hero-arrow" viewBox="0 0 130 70" aria-hidden="true">
+              <path d="M8 14C40 67 82 59 118 28M94 28l25-1-6 23" />
+            </svg>
             <button className="btn primary" onClick={() => add()}>
               <Plus size={17} />
               Ajouter une tâche
             </button>
           </div>
           <div className="banner-art">
-            <svg
-              className="house-line"
-              viewBox="0 0 340 240"
-              aria-hidden="true"
-            >
-              <path d="M60 206V83L163 12l105 71v123M40 96 163 8l129 90M150 208v-66h45v66M81 107h37v37H81zM213 107h30v37h-30zM62 205h207M158 48h15v15h-15" />
-              <path d="M38 206q-27-40-5-58 19 15 5 58m248 0q35-41 19-58-22 12-19 58" />
-            </svg>
-            <span className="art-spark spark-one">✧</span>
-            <span className="art-spark spark-two">✦</span>
-            <Dog
-              color={db.settings.dogColor}
-              accessory={db.settings.dogAccessory}
-            />
-            <div className="art-note">
-              On fait équipe ? <span>♡</span>
-            </div>
+            <span className="combi-halo" aria-hidden="true" />
+            <Combi />
+            <div className="art-note">LE COMBI DE LA MAISON</div>
           </div>
         </section>
         <div className="stats-grid">
@@ -477,6 +470,9 @@ export default function App() {
             <div className="section-heading">
               <div>
                 <h2>
+                  <span className="section-number" aria-hidden="true">
+                    02
+                  </span>
                   On s’organise ?{" "}
                   <span className="subtle-badge">Semaine {isoWeek(week)}</span>
                 </h2>
@@ -660,12 +656,8 @@ export default function App() {
                 >
                   <X size={13} />
                 </button>
-                <Dog
-                  pose="thinking"
-                  color={db.settings.dogColor}
-                  accessory={db.settings.dogAccessory}
-                />
-                <span className="eyebrow">LE PETIT COUP DE PATTE</span>
+                <Combi pose="thinking" />
+                <span className="eyebrow">LE CONSEIL DU COMBI</span>
                 <h3>
                   {remaining.length
                     ? "On prépare les courses ?"
@@ -682,9 +674,7 @@ export default function App() {
                     remaining.length ? setView("shopping") : add()
                   }
                 >
-                  {remaining.length
-                    ? "Voir mes courses"
-                    : "Choisir ma première tâche"}
+                  {remaining.length ? "Voir mes courses" : "Préparer une tâche"}
                   <ArrowRight size={14} />
                 </button>
               </div>
@@ -1051,11 +1041,7 @@ export default function App() {
           </p>
         </div>
         <section className="shopping-summary">
-          <Dog
-            pose="shopping"
-            color={db.settings.dogColor}
-            accessory={db.settings.dogAccessory}
-          />
+          <Combi pose="shopping" />
           <div>
             <h3>
               {remaining.length
@@ -1331,11 +1317,7 @@ export default function App() {
         </div>
         {!all.length && (
           <div className="maintenance-empty">
-            <Dog
-              pose="prepare"
-              color={db.settings.dogColor}
-              accessory={db.settings.dogAccessory}
-            />
+            <Combi pose="prepare" />
             <div>
               <h3>On pense aussi à l’entretien.</h3>
               <p>
@@ -1363,19 +1345,15 @@ export default function App() {
     <div className="app-layout">
       <aside className="sidebar">
         <button className="brand" onClick={() => setView("week")}>
-          <span className="brand-icon">
-            <House size={27} strokeWidth={1.6} />
-            <span>✦</span>
-          </span>
-          <span>
-            maison
-            <br />
-            <b>
-              complice<span className="brand-dot">.</span>
-            </b>
-          </span>
+          <img
+            className="brand-crest"
+            src={blason}
+            alt="La Frésandière — Joie et partage — 1977"
+            width="1254"
+            height="1254"
+          />
         </button>
-        <div className="sidebar-caption">UN CHEZ-SOI QUI VOUS RESSEMBLE</div>
+        <div className="sidebar-caption">LE CARNET DE LA MAISON</div>
         <nav aria-label="Navigation principale">
           {NAV.map(([key, label, Icon]) => (
             <button
@@ -1423,6 +1401,21 @@ export default function App() {
       </aside>
       <div className="main-shell">
         <header className="topbar">
+          <button
+            className="mobile-house-brand"
+            onClick={() => setView("week")}
+            aria-label="Retour au planning de La Frésandière"
+          >
+            <img
+              src={blason}
+              alt="Blason de La Frésandière"
+              width="1254"
+              height="1254"
+            />
+            <span>
+              La Frésandière<small>LE CARNET DE LA MAISON</small>
+            </span>
+          </button>
           <div className="breadcrumb">
             Ma maison <ChevronRight size={13} />
             <strong>
@@ -1512,7 +1505,7 @@ export default function App() {
             <span>Fait pour votre maison, et pour vous.</span>
             <span>
               <House size={12} />
-              maison complice
+              La Frésandière
             </span>
           </footer>
         </main>
@@ -1600,26 +1593,14 @@ export default function App() {
                   }
                 />
               </Field>
-              <Field label="Nom de votre complice (facultatif)">
+              <Field label="Nom du combi (facultatif)" wide>
                 <input
-                  placeholder="À vous de lui trouver un nom"
-                  value={db.settings.dogName || ""}
+                  placeholder="Comment voulez-vous l’appeler ?"
+                  value={db.settings.combiName ?? db.settings.dogName ?? ""}
                   onChange={(e) =>
                     update({
                       ...db,
-                      settings: { ...db.settings, dogName: e.target.value },
-                    })
-                  }
-                />
-              </Field>
-              <Field label="Couleur du pelage">
-                <input
-                  type="color"
-                  value={db.settings.dogColor || "#805e49"}
-                  onChange={(e) =>
-                    update({
-                      ...db,
-                      settings: { ...db.settings, dogColor: e.target.value },
+                      settings: { ...db.settings, combiName: e.target.value },
                     })
                   }
                 />
@@ -1635,24 +1616,10 @@ export default function App() {
                     })
                   }
                 />
-                Afficher les petits coups de patte
-                {db.settings.dogName ? ` de ${db.settings.dogName}` : ""}
-              </label>
-              <label className="check-line wide">
-                <input
-                  type="checkbox"
-                  checked={db.settings.dogAccessory}
-                  onChange={(e) =>
-                    update({
-                      ...db,
-                      settings: {
-                        ...db.settings,
-                        dogAccessory: e.target.checked,
-                      },
-                    })
-                  }
-                />
-                Un petit foulard pour mon complice
+                Afficher les conseils du combi
+                {(db.settings.combiName ?? db.settings.dogName)
+                  ? ` · ${db.settings.combiName ?? db.settings.dogName}`
+                  : ""}
               </label>
             </div>
             <div className="subsection">
@@ -1756,11 +1723,7 @@ export default function App() {
       )}
       {toast && (
         <div className="toast" role="status">
-          <Dog
-            pose="celebrate"
-            color={db.settings.dogColor}
-            accessory={db.settings.dogAccessory}
-          />
+          <Combi pose="celebrate" />
           <span>{toast}</span>
           <button
             className="icon-btn"

@@ -3,8 +3,8 @@
   color: #343b35;
   background: #f8f9f6;
   font-synthesis: none;
-  --purple: #776194;
-  --dark-purple: #65517e;
+  --purple: #214f3c;
+  --dark-purple: #153b2c;
   --sage: #e7eee4;
   --muted: #7b8079;
   --line: #e9ebe4;
@@ -50,7 +50,7 @@ a:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 3px solid #b3a0d0;
+  outline: 3px solid #bb943e;
   outline-offset: 3px;
 }
 h1,
@@ -196,8 +196,8 @@ small {
   position: relative;
 }
 .sidebar nav > button.active {
-  background: #e4dfee;
-  color: #725c90;
+  background: #e2e9dd;
+  color: #214f3c;
   font-weight: 650;
 }
 .sidebar nav > button:hover,
@@ -208,12 +208,12 @@ small {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #8c75aa;
+  background: #b58a35;
   margin-left: auto;
 }
 .nav-count {
   font-size: 10px;
-  background: #e5deed;
+  background: #e8e8d4;
   padding: 1px 6px;
   border-radius: 10px;
   margin-left: auto;
@@ -374,7 +374,7 @@ main {
 .btn.primary {
   background: var(--purple);
   color: white;
-  box-shadow: 0 3px 6px #76619514;
+  box-shadow: 0 3px 6px #214f3c14;
 }
 .btn.primary:hover {
   background: var(--dark-purple);
@@ -470,7 +470,7 @@ main {
   stroke-width: 1;
   opacity: 0.6;
 }
-.banner-art > .dog {
+.banner-art > .combi {
   width: 225px;
   height: 220px;
   position: absolute;
@@ -532,8 +532,8 @@ main {
   flex-shrink: 0;
 }
 .lilac {
-  background: #eee9f3;
-  color: #9780ae;
+  background: #e5eadf;
+  color: #66805c;
 }
 .sage {
   background: #eaf0e5;
@@ -566,7 +566,7 @@ main {
   color: #9ea192;
 }
 .stat-button:hover {
-  border-color: #c6b8d4;
+  border-color: #a9b797;
 }
 .planning-columns {
   display: grid;
@@ -797,7 +797,7 @@ main {
   margin-bottom: 12px;
 }
 .is-today {
-  border-color: #c1cdb3;
+  border-color: #b3bc9d;
 }
 .today-dot {
   width: 5px;
@@ -814,8 +814,8 @@ main {
   padding-top: 4px;
 }
 .mascot-tip {
-  background: #eeedf3;
-  border: 1px solid #e6e2ed;
+  background: #f0eee0;
+  border: 1px solid #dfd9c0;
   border-radius: 11px;
   padding: 0 20px 20px;
   text-align: center;
@@ -827,7 +827,7 @@ main {
   right: 7px;
   top: 6px;
 }
-.mascot-tip .dog {
+.mascot-tip .combi {
   width: 111px;
   height: 103px;
   margin: 10px auto -2px;
@@ -836,23 +836,23 @@ main {
   display: block;
   font-size: 8px;
   letter-spacing: 1.2px;
-  color: #9c8cad;
+  color: #8e793f;
 }
 .mascot-tip h3 {
   font-size: 14px;
-  color: #756184;
+  color: #254e39;
   line-height: 1.6;
   margin: 9px 0 7px;
 }
 .mascot-tip p {
   font-size: 10px;
-  color: #9b91a4;
+  color: #7b8068;
   line-height: 1.8;
 }
 .mascot-tip .text-link {
   font-size: 10px;
   margin-top: 13px;
-  color: #81708f;
+  color: #496b4b;
 }
 .text-link {
   display: inline-flex;
@@ -1060,8 +1060,8 @@ main {
   background: #edf3e7;
 }
 .purple {
-  color: #8e78a5;
-  background: #f1ebf6;
+  color: #496b4b;
+  background: #e5ecdf;
 }
 .badge {
   display: inline-flex;
@@ -1166,9 +1166,9 @@ main {
   color: #939c87;
 }
 .filter-chip.selected {
-  border-color: #cfc0e0;
-  background: #ede7f4;
-  color: #81699a;
+  border-color: #b1bea2;
+  background: #e5ecdf;
+  color: #30583d;
 }
 .calendar {
   border: 1px solid #dfe4d4;
@@ -1229,7 +1229,7 @@ main {
   place-items: center;
 }
 .calendar-today {
-  background: #fbf9fe;
+  background: #fbf9f0;
 }
 .weekend-note {
   color: #b6af99;
@@ -1241,14 +1241,14 @@ main {
   flex-direction: column;
   gap: 3px;
   width: 100%;
-  background: #f0ebf5;
-  color: #827192;
+  background: #eaf0e5;
+  color: #45623e;
   text-align: left;
   border-radius: 5px;
   padding: 7px 6px;
   margin-top: 5px;
   overflow-wrap: anywhere;
-  border-left: 2px solid #b29ac7;
+  border-left: 2px solid #ad8c43;
 }
 .calendar-event strong {
   font-size: 10px;
@@ -1297,7 +1297,7 @@ main {
   padding: 8px 25px;
   margin-bottom: 25px;
 }
-.shopping-summary .dog {
+.shopping-summary .combi {
   width: 110px;
   height: 105px;
   flex-shrink: 0;
@@ -1460,7 +1460,7 @@ main {
   padding: 14px;
 }
 .month-card.current {
-  border-color: #c5b5d4;
+  border-color: #bca568;
 }
 .month-card > header {
   display: flex;
@@ -1506,7 +1506,7 @@ main {
   max-width: 550px;
   margin: 25px auto;
 }
-.maintenance-empty .dog {
+.maintenance-empty .combi {
   width: 130px;
   flex-shrink: 0;
 }
@@ -1825,8 +1825,8 @@ main {
 }
 .inline-form {
   padding: 17px;
-  border: 1px solid #d9d0e3;
-  background: #f6f3fa;
+  border: 1px solid #c4cbaa;
+  background: #f3f5e9;
   border-radius: 10px;
   margin-top: 17px;
 }
@@ -1946,7 +1946,7 @@ main {
   max-width: calc(100% - 30px);
   animation: appear 0.2s ease;
 }
-.toast .dog {
+.toast .combi {
   width: 65px;
   height: 60px;
 }
@@ -1984,7 +1984,7 @@ main {
   .welcome-banner {
     min-height: 285px;
   }
-  .banner-art > .dog {
+  .banner-art > .combi {
     left: 30px;
     width: 250px;
     height: 240px;
@@ -1998,7 +1998,7 @@ main {
   .mascot-tip {
     padding-bottom: 25px;
   }
-  .mascot-tip .dog {
+  .mascot-tip .combi {
     width: 135px;
     height: 125px;
   }
@@ -2071,7 +2071,7 @@ main {
   .banner-art {
     min-width: 230px;
   }
-  .banner-art > .dog {
+  .banner-art > .combi {
     width: 205px;
     left: 0;
   }
@@ -2173,7 +2173,7 @@ main {
     min-width: 180px;
     width: 37%;
   }
-  .banner-art > .dog {
+  .banner-art > .combi {
     left: -8px;
     width: 190px;
     bottom: 20px;
@@ -2238,7 +2238,7 @@ main {
     gap: 8px;
     padding: 12px;
   }
-  .shopping-summary .dog {
+  .shopping-summary .combi {
     width: 80px;
     height: 85px;
   }
@@ -2331,7 +2331,7 @@ main {
   }
   .sidebar nav > button.active {
     background: transparent;
-    color: #82629e;
+    color: #254e39;
   }
   .sidebar nav > button.active:before {
     content: "";
@@ -2339,7 +2339,7 @@ main {
     top: 0;
     width: 25px;
     height: 2px;
-    background: #9b7ab7;
+    background: #b18a38;
   }
   .nav-dot {
     display: none;
@@ -2374,7 +2374,7 @@ main {
     height: 27px;
   }
   .topbar::before {
-    content: "maison complice.";
+    content: "La Frésandière";
     font-family: "Manrope Variable", sans-serif;
     color: #70815e;
     font-size: 13px;
@@ -2437,7 +2437,7 @@ main {
     width: 38%;
     min-width: 115px;
   }
-  .banner-art > .dog {
+  .banner-art > .combi {
     width: 158px;
     height: 170px;
     left: -28px;
@@ -2575,7 +2575,7 @@ main {
   .mascot-tip {
     padding: 0 12px 16px;
   }
-  .mascot-tip .dog {
+  .mascot-tip .combi {
     width: 95px;
     height: 95px;
     margin-top: 10px;
@@ -2716,7 +2716,7 @@ main {
     gap: 5px;
     padding: 6px 9px 6px 1px;
   }
-  .toast .dog {
+  .toast .combi {
     width: 55px;
     height: 48px;
     flex-shrink: 0;
@@ -2812,7 +2812,7 @@ main {
     flex-wrap: wrap;
     padding: 12px;
   }
-  .shopping-summary .dog {
+  .shopping-summary .combi {
     width: 75px;
     height: 85px;
   }
@@ -2906,7 +2906,7 @@ main {
   .maintenance-empty {
     gap: 12px;
   }
-  .maintenance-empty .dog {
+  .maintenance-empty .combi {
     width: 100px;
   }
   .maintenance-empty h3 {
@@ -3018,7 +3018,7 @@ main {
   color: #748067;
 }
 .mascot-tip p {
-  color: #81728d;
+  color: #5c6952;
 }
 .availability.green {
   color: #60794e;
@@ -3168,5 +3168,990 @@ main {
   }
   .calendar-week .calendar-event small {
     font-size: 10px;
+  }
+}
+
+/* Identité de La Frésandière : crème, vert profond et touches d'or. */
+:root {
+  background: #f8f6ef;
+  color: #263e30;
+  --cream: #f2eddf;
+}
+.sidebar {
+  background: #eeeede;
+  border-right-color: #dedfcd;
+  padding-top: 24px;
+}
+.brand {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+}
+.brand-crest {
+  display: block;
+  width: 155px;
+  height: 155px;
+  object-fit: contain;
+}
+.sidebar-caption {
+  text-align: center;
+  margin: 8px 0 26px;
+  color: #687653;
+  letter-spacing: 1.4px;
+}
+.topbar {
+  background: #fbfaf6;
+}
+.welcome-banner {
+  background: linear-gradient(110deg, #ece8d7, #f7f3e8);
+  border-color: #e0d9c2;
+  min-height: 290px;
+}
+.welcome-copy {
+  padding: 32px 34px;
+}
+.welcome-copy h2 {
+  color: #1e4832;
+}
+.welcome-copy h2 span {
+  color: #6f7958;
+}
+.combi {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 0;
+  vertical-align: middle;
+}
+.combi-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.combi-context {
+  position: absolute;
+  right: 0;
+  bottom: 8%;
+  display: grid;
+  place-items: center;
+  width: 29px;
+  height: 29px;
+  border: 1px solid #d1c28f;
+  border-radius: 50%;
+  color: #365a3d;
+  background: #faf6e7;
+  box-shadow: 0 2px 8px #193c2410;
+}
+.banner-art {
+  width: 44%;
+  min-width: 280px;
+}
+.banner-art > .combi {
+  width: 285px;
+  height: 265px;
+  bottom: 15px;
+  left: 10px;
+  transform: none;
+  z-index: 1;
+  filter: drop-shadow(0 8px 6px #2e422315);
+}
+.combi-halo {
+  position: absolute;
+  width: 235px;
+  height: 235px;
+  border: 1px solid #d0bd83;
+  border-radius: 50%;
+  top: 21px;
+  left: 36px;
+  opacity: 0.4;
+}
+.art-note {
+  bottom: 15px;
+  right: 22px;
+  transform: none;
+  font-family: inherit;
+  font-size: 8px;
+  letter-spacing: 1.6px;
+  color: #777b5e;
+  z-index: 2;
+}
+.mascot-tip {
+  background: #f0eee0;
+  border-color: #dfd9c0;
+}
+.mascot-tip .combi {
+  width: 126px;
+  height: 118px;
+  margin: 12px auto 0;
+}
+.mascot-tip .combi-context {
+  width: 25px;
+  height: 25px;
+  bottom: 7%;
+}
+.mascot-tip h3 {
+  color: #294d35;
+}
+.mascot-tip .eyebrow {
+  color: #8a733b;
+}
+.mascot-tip .text-link {
+  color: #365c3b;
+}
+.mascot-tip p {
+  color: #67725b;
+}
+.heading-dot {
+  color: #b69445;
+}
+.sidebar-motto {
+  transform: none;
+  color: #798264;
+}
+.shopping-summary .combi {
+  width: 118px;
+  height: 110px;
+}
+.maintenance-empty .combi {
+  width: 145px;
+  height: 135px;
+}
+.toast .combi {
+  width: 72px;
+  height: 65px;
+}
+.toast .combi-context {
+  width: 20px;
+  height: 20px;
+  right: -2px;
+  bottom: 8%;
+}
+.toast .combi-context svg {
+  width: 12px;
+  height: 12px;
+}
+@media (max-width: 1150px) {
+  .brand-crest {
+    width: 143px;
+    height: 143px;
+  }
+  .banner-art {
+    min-width: 230px;
+  }
+  .banner-art > .combi {
+    width: 245px;
+    height: 245px;
+    left: -5px;
+  }
+  .combi-halo {
+    width: 200px;
+    height: 200px;
+    left: 10px;
+    top: 30px;
+  }
+}
+@media (max-width: 900px) {
+  .brand-crest {
+    width: 130px;
+    height: 130px;
+  }
+  .sidebar-caption {
+    font-size: 7px;
+    letter-spacing: 0.8px;
+  }
+  .banner-art {
+    min-width: 190px;
+  }
+  .banner-art > .combi {
+    width: 215px;
+    height: 225px;
+    left: -10px;
+    bottom: 18px;
+  }
+  .combi-halo {
+    width: 170px;
+    height: 170px;
+    left: 0;
+    top: 42px;
+  }
+  .shopping-summary .combi {
+    width: 90px;
+    height: 95px;
+  }
+}
+@media (max-width: 650px) {
+  .sidebar {
+    padding: 0 5px;
+    background: #f4f3e9ee;
+  }
+  .topbar::before {
+    content: "La Frésandière";
+    color: #244e37;
+    letter-spacing: -0.4px;
+  }
+  .welcome-banner {
+    min-height: 270px;
+  }
+  .welcome-copy {
+    padding: 23px 0 23px 19px;
+  }
+  .welcome-copy h2 {
+    font-size: 25px;
+  }
+  .welcome-copy p {
+    max-width: 190px;
+  }
+  .banner-art {
+    min-width: 114px;
+    width: 38%;
+  }
+  .banner-art > .combi {
+    width: 168px;
+    height: 185px;
+    left: -33px;
+    bottom: 17px;
+    transform: none;
+  }
+  .combi-halo {
+    width: 135px;
+    height: 135px;
+    left: -16px;
+    top: 60px;
+  }
+  .mascot-tip .combi {
+    width: 104px;
+    height: 102px;
+  }
+  .mascot-tip .combi-context {
+    width: 22px;
+    height: 22px;
+  }
+  .mascot-tip .combi-context svg {
+    width: 14px;
+  }
+  .shopping-summary .combi {
+    width: 80px;
+    height: 90px;
+  }
+  .maintenance-empty .combi {
+    width: 110px;
+    height: 110px;
+  }
+  .toast .combi {
+    width: 58px;
+    height: 52px;
+  }
+}
+
+/* Carnet graphique : grands repères, papiers et tracés à main levée. */
+.main-shell {
+  background: #f8f5eb;
+}
+.sidebar {
+  background: #eee9d8;
+}
+.sidebar nav > button.active {
+  background: #204a35;
+  color: #fff8e8;
+  border-radius: 4px 12px 4px 12px;
+}
+.sidebar nav > button.active .nav-dot {
+  background: #d9ba6e;
+}
+.sidebar-divider {
+  background: #cbc6a9;
+}
+.brand-crest {
+  width: 169px;
+  height: 169px;
+}
+.topbar {
+  border-bottom-color: #ded6bf;
+}
+.mobile-house-brand {
+  display: none;
+}
+h1 {
+  color: #1c3d2c;
+}
+.welcome-banner {
+  background: #183e2c;
+  border: 0;
+  border-radius: 4px 24px 4px 24px;
+  min-height: 302px;
+  box-shadow: 0 8px 0 -4px #d8c79e;
+}
+.welcome-copy {
+  position: relative;
+  padding: 32px 36px;
+}
+.welcome-copy .eyebrow {
+  color: #d1bc82;
+  letter-spacing: 1.6px;
+  position: relative;
+  z-index: 1;
+}
+.hero-number {
+  position: absolute;
+  right: 16px;
+  top: 4px;
+  font-family: "Manrope Variable", sans-serif;
+  font-size: 124px;
+  font-weight: 800;
+  font-style: italic;
+  color: #f5e8b4;
+  opacity: 0.08;
+  line-height: 1;
+  pointer-events: none;
+}
+.welcome-copy h2 {
+  color: #fff9e9;
+  font-size: 36px;
+  font-weight: 750;
+  line-height: 1.3;
+  position: relative;
+}
+.welcome-copy h2 span {
+  color: #dac997;
+  position: relative;
+  display: inline-block;
+}
+.welcome-copy h2 span::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  right: -8px;
+  height: 7px;
+  bottom: -5px;
+  border-top: 2px solid #bfa76a;
+  border-radius: 50%;
+  transform: rotate(-2deg);
+}
+.welcome-copy p {
+  color: #d5dccb;
+  font-size: 12px;
+  margin-top: 19px;
+}
+.welcome-copy .btn.primary {
+  background: #e5d4a2;
+  color: #193c28;
+  box-shadow: 3px 3px 0 #0e2d1d;
+  font-size: 12px;
+  padding: 10px 15px;
+}
+.welcome-copy .btn.primary:hover {
+  background: #f2e2b8;
+}
+.banner-art {
+  background: #e9dfc6;
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+  min-width: 280px;
+}
+.banner-art > .combi {
+  width: 290px;
+  height: 277px;
+  left: 15px;
+  bottom: 10px;
+}
+.combi-halo {
+  top: 33px;
+  left: 47px;
+  width: 220px;
+  height: 220px;
+  opacity: 0.75;
+  border: 1.5px solid #b39b5f;
+  border-radius: 48% 52% 47% 53%;
+  transform: rotate(-12deg);
+}
+.combi-halo::after {
+  content: "";
+  position: absolute;
+  inset: 5px -4px -5px 5px;
+  border: 1px solid #b39b5f;
+  border-radius: 48% 52% 47% 53%;
+}
+.art-note {
+  bottom: 12px;
+  right: 20px;
+  font-size: 8px;
+  letter-spacing: 1.8px;
+  color: #4c6244;
+}
+.stats-grid {
+  margin-top: 27px;
+  gap: 17px;
+}
+.stat {
+  padding: 34px 18px 18px;
+  position: relative;
+  border: 1px solid #d8d3bb;
+  border-radius: 3px 13px 3px 13px;
+  background: #e5e5cf;
+}
+.stat::before {
+  content: "LE PROGRAMME";
+  position: absolute;
+  left: 18px;
+  top: 12px;
+  letter-spacing: 1.5px;
+  font-size: 8px;
+  color: #59704a;
+  font-weight: 700;
+}
+.stat:nth-child(2) {
+  background: #fffdf5;
+}
+.stat:nth-child(2)::before {
+  content: "LES AVANCÉES";
+}
+.stat:nth-child(3) {
+  background: #e5d4aa;
+}
+.stat:nth-child(3)::before {
+  content: "LA PRÉPARATION";
+}
+.stat .stat-icon {
+  border: 1px solid #b9bd9f;
+  background: transparent;
+  color: #4f6b42;
+  border-radius: 50%;
+}
+.stat strong {
+  color: #23412e;
+}
+.stat small {
+  color: #647456;
+}
+.stat-button:hover {
+  background: #edddb4;
+  border-color: #b29c63;
+}
+.section-heading h2 {
+  font-size: 21px;
+  flex-wrap: wrap;
+}
+.section-number {
+  font-size: 43px;
+  color: #345e3e;
+  line-height: 1;
+  font-weight: 750;
+  font-style: italic;
+  letter-spacing: -3px;
+  margin-right: 5px;
+}
+.section-heading p {
+  padding-left: 52px;
+}
+.weekly-objective {
+  position: relative;
+  background: #f3ebcf;
+  border: 1px solid #ddd0a5;
+  box-shadow: 2px 3px 0 #e5dec8;
+  border-radius: 3px;
+  margin-top: 22px;
+  margin-bottom: 18px;
+}
+.weekly-objective::before {
+  content: "";
+  width: 63px;
+  height: 14px;
+  position: absolute;
+  top: -8px;
+  left: calc(50% - 31px);
+  transform: rotate(-3deg);
+  background: #d2bd7ca1;
+  clip-path: polygon(3% 0, 98% 5%, 100% 94%, 0 100%);
+}
+.filter-group {
+  padding: 4px 0;
+}
+.filter-group select {
+  color: #61744f;
+}
+.slots {
+  padding-left: 17px;
+  position: relative;
+}
+.slots::before {
+  content: "";
+  position: absolute;
+  width: 1px;
+  background: #b6b99a;
+  left: 4px;
+  top: 27px;
+  bottom: 30px;
+}
+.slot {
+  position: relative;
+  overflow: visible;
+  border-radius: 3px 12px 3px 12px;
+  border-color: #d8d9c1;
+}
+.slot::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e7d8ac;
+  border: 2px solid #6e8157;
+  position: absolute;
+  left: -18px;
+  top: 29px;
+}
+.slot-header {
+  background: #f5f5e9;
+  border-radius: 3px 12px 0 0;
+}
+.date-tile {
+  background: #32583a;
+  color: #fff8e4;
+  border-radius: 3px;
+}
+.date-tile span {
+  color: #e2cd8e;
+}
+.slot.optional .date-tile {
+  background: #e7dfc6;
+  color: #6a754f;
+}
+.slot.optional .date-tile span {
+  color: #817957;
+}
+.slot-empty {
+  padding-top: 9px;
+}
+.slot.optional .slot-header {
+  background: #faf8ef;
+}
+.mascot-tip {
+  background: #204732;
+  color: #fff7e3;
+  border: 1px solid #183e2a;
+  border-radius: 35% 3px 12px 3px / 10% 3px 12px 3px;
+  padding-top: 8px;
+}
+.mascot-tip h3 {
+  color: #f4eaca;
+  font-size: 16px;
+}
+.mascot-tip p {
+  color: #d1dac7;
+}
+.mascot-tip .eyebrow {
+  color: #cdb574;
+}
+.mascot-tip .text-link {
+  color: #e0c583;
+}
+.mascot-tip .tip-close {
+  color: #b5c6a7;
+}
+.mascot-tip .tip-close:hover {
+  background: #335b3e;
+}
+.mascot-tip .combi {
+  width: 145px;
+  height: 133px;
+}
+.aside-card {
+  border: 1px solid #dad5bc;
+  border-radius: 2px 15px 2px 15px;
+  background: #fffdf5;
+  box-shadow: 3px 3px 0 #e8e2cd;
+}
+.aside-card > .row:first-child::before {
+  content: "03";
+  font-size: 27px;
+  font-style: italic;
+  font-weight: 700;
+  color: #9b8855;
+  margin-right: -2px;
+}
+.aside-card > .row:first-child h3 {
+  flex: 1;
+}
+.unplanned {
+  background: #eeead8;
+  border-color: #cac4a8;
+  border-radius: 2px;
+}
+.view-intro {
+  padding: 24px 27px;
+  background: #244a33;
+  border-radius: 3px 20px 3px 20px;
+  border-bottom: 4px solid #c4ad6e;
+}
+.view-intro .eyebrow {
+  color: #d9c285;
+}
+.view-intro h2 {
+  color: #fff5df;
+}
+.view-intro p {
+  color: #d7e0cb;
+}
+.calendar,
+.buy-list {
+  border-color: #d9d3b9;
+}
+.calendar-weekdays {
+  background: #e4e5cf;
+}
+.year-grid .month-card:nth-child(3n + 1) {
+  background: #eeeedc;
+}
+.year-grid .month-card:nth-child(3n + 2) {
+  background: #f7eed7;
+}
+.month-card.current {
+  border: 2px solid #8c985f;
+}
+.app-footer {
+  border-color: #dcd7c0;
+}
+@media (min-width: 1500px) {
+  .welcome-banner {
+    min-height: 315px;
+  }
+  .banner-art > .combi {
+    width: 315px;
+    height: 295px;
+    left: 30px;
+  }
+  .combi-halo {
+    left: 72px;
+  }
+}
+@media (max-width: 1150px) {
+  .banner-art {
+    min-width: 240px;
+  }
+  .banner-art > .combi {
+    width: 250px;
+    height: 260px;
+    left: 2px;
+    bottom: 20px;
+  }
+  .combi-halo {
+    width: 185px;
+    height: 185px;
+    left: 35px;
+    top: 55px;
+  }
+  .welcome-copy {
+    padding: 30px 26px;
+  }
+  .welcome-copy h2 {
+    font-size: 32px;
+  }
+  .brand-crest {
+    width: 150px;
+    height: 150px;
+  }
+}
+@media (max-width: 900px) {
+  .banner-art {
+    min-width: 185px;
+  }
+  .banner-art > .combi {
+    width: 205px;
+    height: 225px;
+    left: -9px;
+    bottom: 25px;
+  }
+  .combi-halo {
+    left: 15px;
+    top: 65px;
+    width: 155px;
+    height: 155px;
+  }
+  .welcome-copy h2 {
+    font-size: 28px;
+  }
+  .stat {
+    padding: 34px 10px 14px;
+  }
+  .stat::before {
+    left: 10px;
+    font-size: 7px;
+  }
+  .stat .stat-icon {
+    position: absolute;
+    right: 9px;
+    top: 34px;
+    width: 26px;
+    height: 26px;
+  }
+  .brand-crest {
+    width: 135px;
+    height: 135px;
+  }
+}
+@media (max-width: 650px) {
+  .sidebar {
+    background: #f4f0e3f5;
+    padding: 0 5px;
+  }
+  .sidebar nav > button.active {
+    color: #224c31;
+    background: transparent;
+  }
+  .topbar {
+    height: 66px;
+  }
+  .topbar::before {
+    content: none;
+  }
+  .mobile-house-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    text-align: left;
+  }
+  .mobile-house-brand img {
+    width: 43px;
+    height: 48px;
+    object-fit: contain;
+  }
+  .mobile-house-brand > span {
+    font-family: "Manrope Variable", sans-serif;
+    font-size: 13px;
+    font-weight: 750;
+    color: #24462d;
+  }
+  .mobile-house-brand small {
+    display: block;
+    font-family: inherit;
+    font-size: 6px;
+    color: #8d815b;
+    letter-spacing: 1.1px;
+    margin-top: 2px;
+  }
+  .welcome-banner {
+    min-height: 300px;
+    border-radius: 3px 17px 3px 17px;
+  }
+  .welcome-copy {
+    padding: 23px 0 23px 18px;
+  }
+  .welcome-copy .eyebrow {
+    font-size: 6px;
+    letter-spacing: 1px;
+    max-width: 190px;
+    display: block;
+  }
+  .welcome-copy h2 {
+    font-size: 27px;
+    margin-top: 14px;
+  }
+  .welcome-copy p {
+    max-width: 170px;
+    font-size: 10px;
+    margin-top: 18px;
+  }
+  .welcome-copy .btn.primary {
+    font-size: 10px;
+    padding: 9px 11px;
+  }
+  .hero-number {
+    right: 0;
+    top: 9px;
+    font-size: 90px;
+  }
+  .banner-art {
+    width: 38%;
+    min-width: 116px;
+  }
+  .banner-art > .combi {
+    width: 163px;
+    height: 183px;
+    left: -27px;
+    bottom: 43px;
+  }
+  .combi-halo {
+    width: 123px;
+    height: 123px;
+    left: -7px;
+    top: 85px;
+  }
+  .stats-grid {
+    gap: 8px;
+    margin: 21px 0 27px;
+  }
+  .stat {
+    padding: 28px 9px 12px;
+  }
+  .stat::before {
+    font-size: 6px;
+    letter-spacing: 0.6px;
+    left: 9px;
+    top: 10px;
+  }
+  .stat .stat-icon {
+    top: 28px;
+    right: 8px;
+    width: 23px;
+    height: 24px;
+  }
+  .stat strong {
+    font-size: 24px;
+  }
+  .section-number {
+    font-size: 35px;
+    margin-right: 0;
+  }
+  .section-heading h2 {
+    font-size: 18px;
+    gap: 8px;
+  }
+  .section-heading p {
+    padding-left: 42px;
+  }
+  .mascot-tip h3 {
+    font-size: 13px;
+  }
+  .mascot-tip .combi {
+    width: 110px;
+    height: 110px;
+  }
+  .aside-card > .row:first-child::before {
+    font-size: 23px;
+  }
+  .view-intro {
+    padding: 22px 19px;
+  }
+  .view-intro h2 {
+    font-size: 24px;
+  }
+  .weekly-objective {
+    margin-top: 23px;
+  }
+}
+.hero-arrow {
+  position: absolute;
+  width: 100px;
+  height: 65px;
+  bottom: 32px;
+  right: 15px;
+  fill: none;
+  stroke: #cbb77a;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.85;
+}
+.banner-art > .combi {
+  left: calc(50% - 153px);
+  width: 306px;
+  height: 285px;
+  bottom: 10px;
+}
+.combi-halo {
+  left: calc(50% - 110px);
+}
+@media (min-width: 1500px) {
+  .banner-art > .combi {
+    left: calc(50% - 165px);
+    width: 330px;
+    height: 300px;
+  }
+}
+@media (max-width: 1150px) {
+  .banner-art > .combi {
+    left: calc(50% - 130px);
+    width: 260px;
+    height: 260px;
+  }
+  .combi-halo {
+    left: calc(50% - 92px);
+  }
+  .hero-arrow {
+    width: 75px;
+    right: 12px;
+    bottom: 22px;
+  }
+}
+@media (max-width: 900px) {
+  .banner-art > .combi {
+    left: calc(50% - 109px);
+    width: 218px;
+    height: 225px;
+    bottom: 28px;
+  }
+  .combi-halo {
+    left: calc(50% - 77px);
+  }
+  .hero-arrow {
+    display: none;
+  }
+}
+@media (max-width: 650px) {
+  .welcome-banner {
+    flex-direction: column;
+    min-height: 0;
+  }
+  .welcome-copy {
+    padding: 24px 21px 26px;
+    width: 100%;
+  }
+  .welcome-copy .eyebrow {
+    max-width: none;
+    font-size: 7px;
+  }
+  .welcome-copy h2 {
+    font-size: 29px;
+  }
+  .welcome-copy p {
+    max-width: none;
+    font-size: 11px;
+    margin-top: 20px;
+  }
+  .welcome-copy .btn.primary {
+    font-size: 11px;
+  }
+  .hero-number {
+    font-size: 105px;
+    top: 15px;
+    right: 12px;
+  }
+  .hero-arrow {
+    display: block;
+    right: 23px;
+    bottom: 20px;
+    width: 65px;
+    height: 50px;
+    transform: rotate(38deg);
+  }
+  .banner-art {
+    width: 100%;
+    min-width: 0;
+    height: 168px;
+    flex: 0 0 168px;
+    clip-path: none;
+    border-top: 1px solid #c9b987;
+  }
+  .banner-art > .combi {
+    width: 200px;
+    height: 185px;
+    left: calc(50% - 100px);
+    bottom: 0;
+  }
+  .combi-halo {
+    width: 138px;
+    height: 138px;
+    left: calc(50% - 69px);
+    top: 12px;
+  }
+  .art-note {
+    display: block;
+    font-size: 6px;
+    letter-spacing: 1px;
+    right: 10px;
+    bottom: 9px;
   }
 }
