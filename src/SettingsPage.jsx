@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Download, Upload, CalendarDays, Save, BookOpen } from "lucide-react";
 import { Field, Modal } from "./ui.jsx";
-import { KEY, SEPARATE_V2, PERIODS, formatDate } from "./model.js";
+import { KEY, USE_V2_STORAGE, PERIODS, formatDate } from "./model.js";
 import {
   createArchive,
   readBackup,
@@ -63,11 +63,12 @@ export default function SettingsPage({
         ne sont pas synchronisés. Exportez une archive ZIP pour disposer d’une
         sauvegarde complète.
       </p>
-      {SEPARATE_V2 && (
+      {USE_V2_STORAGE && (
         <p className="notice">
-          Cette V2 possède ses propres données. À la première ouverture, le
-          planning V1 est copié sans être modifié. Les changements et les
-          restaurations faits ici ne modifient ensuite pas la V1.
+          Vos données et documents déjà enregistrés dans la V2 sont conservés.
+          Si vous n’avez pas encore utilisé la V2, les anciennes données sont
+          reprises une seule fois au premier démarrage, sans effacer leur
+          sauvegarde.
         </p>
       )}
       <section className="form-card">

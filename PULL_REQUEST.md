@@ -14,4 +14,4 @@ Validation effectuée :
 
 Limite visuelle : le PNG/SVG authentique `upload/blason.png` et les trois fichiers de maquette cités dans la V2 sont absents de l’environnement. Le blason existant est conservé provisoirement, sans nouvelle génération. La capture Entretien fournie et les descriptions V2 guident les écrans.
 
-Mise en ligne demandée ensuite par l’utilisatrice avec maintien des deux versions. La V1 et son contenu statique restent à la racine ; la V2 est distribuée dans `/v2/` avec stockage séparé et copie initiale non destructive du planning V1. Aucun changement de visibilité du dépôt n’est effectué.
+Mise en ligne de la V2 seule demandée ensuite par l’utilisatrice. La V2 est distribuée à la racine, et `/v2/` redirige vers cette même application. Ses clés de stockage et sa base de fichiers sont conservées pour retrouver les données V2 déjà enregistrées ; les anciennes données V1 ne sont jamais effacées du navigateur. Aucun changement de visibilité du dépôt n’est effectué.

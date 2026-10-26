@@ -10,7 +10,7 @@
     "test": "node --test tests/*.test.js",
     "test:e2e": "playwright test",
     "build:pages": "node scripts/build-pages.mjs",
-    "test:pages": "node tests/pages-isolation.mjs"
+    "test:pages": "node tests/pages-v2.mjs"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.3.0",

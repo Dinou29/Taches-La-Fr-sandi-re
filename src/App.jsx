@@ -24,7 +24,6 @@ import Catalog from "./Catalog.jsx";
 import { Modal } from "./ui.jsx";
 import {
   KEY,
-  SEPARATE_V2,
   empty,
   validateImport,
   localDate,
@@ -120,12 +119,6 @@ export default function App() {
             />
           </button>
           <p className="brand-function">Travaux & entretiens de la maison</p>
-          {SEPARATE_V2 && (
-            <div className="site-version">
-              <strong>V2 indépendante</strong>
-              <a href="../">Ouvrir la V1</a>
-            </div>
-          )}
           {isHome && (
             <div className="header-week">
               <span>Semaine en cours</span>

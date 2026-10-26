@@ -18,7 +18,7 @@ npm test             # modèle, dates, récurrences, compatibilité et fichiers
 npm run test:e2e      # parcours Chromium ordinateur et téléphone
 npm run build        # production dans dist/
 npm run preview      # servir dist/
-npm run build:pages  # V2 statique dans docs/v2/, sans toucher à la V1
+npm run build:pages  # V2 à la racine dans docs/ ; /v2/ redirige vers elle
 ```
 
 Les tests navigateur utilisent `/usr/bin/chromium` (modifiable par `CHROMIUM_PATH`). Ils démarrent Vite au besoin, utilisent des contextes isolés et ne déposent aucune donnée d’exemple dans l’application.
@@ -37,9 +37,9 @@ Les alertes sont internes. Les liens téléphone/courriel ouvrent les applicatio
 
 ## Conservation et sauvegardes
 
-Les données restent dans le **localStorage de cette origine et de ce navigateur**, sous la clé historique `maison-complice-v1` en développement. La distribution V2 séparée utilise `maison-complice-v2` : à sa première ouverture, les données V1 sont copiées sans être modifiées. Ensuite, les deux plannings évoluent indépendamment, y compris après import/restauration. Une V2 existante, même vide, n’est jamais recopiée depuis la V1. La structure v1 est étendue de manière additive : réglages manquants complétés, collections `rooms` et `attachments` ajoutées si absentes, identifiants et champs historiques conservés. Aucune remise à zéro lors d’un changement de présentation. Un stockage illisible est protégé contre l’écrasement ; en cas d’échec d’enregistrement, les saisies restent en mémoire et peuvent être exportées.
+Les données restent dans le **localStorage de cette origine et de ce navigateur**, sous la clé historique `maison-complice-v1` en développement. La version publiée utilise `maison-complice-v2` : à sa première ouverture, les données V1 sont copiées sans être modifiées. Ensuite, les deux plannings évoluent indépendamment, y compris après import/restauration. Une V2 existante, même vide, n’est jamais recopiée depuis la V1. La structure v1 est étendue de manière additive : réglages manquants complétés, collections `rooms` et `attachments` ajoutées si absentes, identifiants et champs historiques conservés. Aucune remise à zéro lors d’un changement de présentation. Un stockage illisible est protégé contre l’écrasement ; en cas d’échec d’enregistrement, les saisies restent en mémoire et peuvent être exportées.
 
-Les **octets des pièces jointes** sont conservés dans **IndexedDB**, base `fresandiere-documents` en développement et `fresandiere-documents-v2` pour la V2 séparée, magasin `files`. Le JSON conserve leurs métadonnées et identifiants stables rattachés à l’entretien. Les fichiers ajoutés dans une nouvelle fiche annulée sont nettoyés. Retirer un document d’une fiche retire son rattachement ; les octets non référencés ne sont pas inclus dans les exports et sont remplacés lors d’une restauration ZIP complète.
+Les **octets des pièces jointes** sont conservés dans **IndexedDB**, base `fresandiere-documents` en développement et `fresandiere-documents-v2` pour la V2 publiée, magasin `files`. Le JSON conserve leurs métadonnées et identifiants stables rattachés à l’entretien. Les fichiers ajoutés dans une nouvelle fiche annulée sont nettoyés. Retirer un document d’une fiche retire son rattachement ; les octets non référencés ne sont pas inclus dans les exports et sont remplacés lors d’une restauration ZIP complète.
 
 Formats : PDF, PNG, JPEG, WebP et GIF, **10 Mo par fichier**. Les images sont affichables et les PDF sont ouverts dans le lecteur du navigateur ; un téléchargement reste disponible. L’affichage d’un PDF dépend des capacités du navigateur. Un quota insuffisant ou un type refusé affiche une erreur et n’ajoute aucune fausse référence.
 
@@ -71,19 +71,18 @@ Le combi existant a été recoloré en terracotta/crème ; il est embarqué et n
 
 Les trois maquettes `exec-0749…`, `exec-ffb2…` et `exec-10f0…` citées dans le document ne sont pas présentes. La composition suit leur description et la capture de fiche Entretien transmise pendant l’implémentation. Les captures réalisées pendant les tests sont des vues de l’application, pas une preuve de publication.
 
-## Deux versions séparées sur GitHub Pages
+## Version publiée sur GitHub Pages
 
-La V1 reste à son adresse et ses fichiers sont conservés dans `docs/` :
+Une seule application est conservée : **la V2**, à l’adresse principale :
 
-- V1 : `https://dinou29.github.io/Taches-La-Fr-sandi-re/`
-- V2 : `https://dinou29.github.io/Taches-La-Fr-sandi-re/v2/`
+`https://dinou29.github.io/Taches-La-Fr-sandi-re/`
 
-`npm run build:pages` reconstruit **uniquement `docs/v2/`**. Il ne vide pas `docs/` et ne remplace pas les fichiers V1. Les chemins relatifs rendent les deux applications autonomes. La V2 contient un lien de retour vers la V1 et une mention explicite de son indépendance.
+L’ancien lien `https://dinou29.github.io/Taches-La-Fr-sandi-re/v2/` redirige vers cette même application. Ce dossier contient uniquement une page de redirection, pas une deuxième version.
 
-Le script active une configuration de distribution propre à la V2 : clé JSON `maison-complice-v2` et base de fichiers `fresandiere-documents-v2`. Les données V1 sont copiées une fois dans la nouvelle clé à la première visite ; les fichiers joints natifs et les restaurations ZIP V2 utilisent ensuite uniquement la base V2. Les documents apparus dans la V2 ne sont pas partagés automatiquement avec la V1. Les sauvegardes restent exportables/importables explicitement.
+`npm run build:pages` reconstruit `docs/` avec la V2 et ajoute la redirection de compatibilité. Le stockage reste `maison-complice-v2` et `fresandiere-documents-v2`, comme pour la V2 précédemment distribuée sous `/v2/` : les données et fichiers V2 existants sont donc conservés. Si aucune sauvegarde V2 n’existe encore, `storage.js` copie une fois les anciennes données de `maison-complice-v1`. Les anciennes sauvegardes restent présentes dans le navigateur et ne sont jamais effacées par la mise à jour.
 
-Après `npm run build:pages`, `npm run test:pages` vérifie les deux versions sous leurs chemins, la copie initiale et l’indépendance des données, y compris après une restauration. Les tests emploient uniquement un contexte navigateur temporaire.
+Après construction, `npm run test:pages` vérifie l’ouverture de la V2 à la racine, la redirection de l’ancien lien et la conservation des données et fichiers V2. Les tests utilisent un navigateur temporaire, sans données personnelles.
 
-L’hébergement existant lit `main` et `/docs`. La mise en ligne des deux versions est effectuée à la demande explicite de l’utilisatrice, sans changement de visibilité du dépôt. Les publications suivantes doivent enregistrer le dossier `docs/v2/` reconstruit avant envoi sur `main`.
+L’hébergement lit toujours `main` et `/docs`. La publication de la V2 seule est effectuée à la demande de l’utilisatrice. Aucun réglage GitHub Pages ni changement de visibilité du dépôt n’est nécessaire. La V1 reste récupérable dans l’historique Git, mais n’est plus proposée sur le site.
 
 Hors périmètre : comptes partagés, synchronisation Google/Outlook, notifications hors application, SMS/courriels automatiques et extraction d’obligations réglementaires.

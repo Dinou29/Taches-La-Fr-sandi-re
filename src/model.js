@@ -1,10 +1,10 @@
 export const VERSION = 1;
 export const LEGACY_KEY = "maison-complice-v1";
-export const SEPARATE_V2 =
-  typeof __FRESANDIERE_SEPARATE_V2__ !== "undefined" &&
-  __FRESANDIERE_SEPARATE_V2__;
-export const KEY = SEPARATE_V2 ? "maison-complice-v2" : LEGACY_KEY;
-export const DOCUMENT_DB = SEPARATE_V2
+export const USE_V2_STORAGE =
+  typeof __FRESANDIERE_V2_STORAGE__ !== "undefined" &&
+  __FRESANDIERE_V2_STORAGE__;
+export const KEY = USE_V2_STORAGE ? "maison-complice-v2" : LEGACY_KEY;
+export const DOCUMENT_DB = USE_V2_STORAGE
   ? "fresandiere-documents-v2"
   : "fresandiere-documents";
 export const uid = () => crypto.randomUUID();
